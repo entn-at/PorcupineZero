@@ -1,5 +1,6 @@
 # PorcupineZero
-Porcupine Hotword detection for the Raspberry Pi Zero
+Porcupine Hotword detection for the Raspberry Pi Zero.
+
 This is a fork of https://github.com/Picovoice/Porcupine stripped down for the Pi Zero.
 The main program is implemented in rust.
 
