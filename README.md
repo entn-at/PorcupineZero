@@ -12,6 +12,18 @@ To build from source install rustup:
     curl https://sh.rustup.rs -sSf | sh
     
 Build it with
+
     cargo build
     
 This will take a long time (50 minutes)
+
+
+To run the tiny model: 
+
+     ./PorcupineZero --keyword-file-path=resources/alexa_raspberrypi_tiny.ppn  --model-file-path=model/porcupine_tiny_params.pv 
+
+
+CPU Requirement:
+
+*Normal Model: 55%
+*Tiny Model: 15%
