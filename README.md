@@ -25,5 +25,5 @@ To run the tiny model:
 
 CPU Requirement:
 
-*Normal Model: 55%
-*Tiny Model: 15%
+* Normal Model: 55%
+* Tiny Model: 15%
