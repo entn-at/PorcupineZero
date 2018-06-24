@@ -71,21 +71,21 @@ impl Porcupine {
 
 #[derive(Debug, Deserialize)]
 struct Args {
-    keyword_file_path: String,
-    model_file_path: String,
+    flag_keyword_file_path: String,
+    flag_model_file_path: String,
 }
 
 const USAGE: &str = "
 Porcupine Zero
 
 Usage:
-  PorcupineZero [--keyword_file_path=<alsa-device> --model_file_path=<alsa-device>]
+  PorcupineZero [--keyword-file-path=<alsa-device> --model-file-path=<alsa-device>]
   PorcupineZero (-h | --help)
 
 Options:
   -h --help                         Show this screen.
-  --keyword_file_path=<Path>    Path to keyword file [default: ./resources/alexa_raspberrypi.ppn]
-  --model_file_path=<Path>      Path to model file   [default: ./model/porcupine_params.pv]
+  --keyword-file-path=<Path>    Path to keyword file [default: ./resources/alexa_raspberrypi.ppn]
+  --model-file-path=<Path>      Path to model file   [default: ./model/porcupine_params.pv]
 ";
 
 
@@ -98,11 +98,11 @@ fn main() {
         .unwrap_or_else(|e| e.exit());
 
     println!("Keyword file path: {}\n  Model file path:    {}\n  ",
-              args.keyword_file_path,
-              args.model_file_path);
+              args.flag_keyword_file_path,
+              args.flag_model_file_path);
 
-    let keyword_file_path = args.keyword_file_path;
-    let model_file_path = args.model_file_path;
+    let keyword_file_path = args.flag_keyword_file_path;
+    let model_file_path = args.flag_model_file_path;
     let mut pinstance = Porcupine::new(model_file_path,keyword_file_path,0.8).unwrap();
 
 
