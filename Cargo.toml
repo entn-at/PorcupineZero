@@ -1,0 +1,17 @@
+[package]
+name = "PorcupineZero"
+version = "0.1.0"
+authors = ["Günther Neumair <office@nyumaya.com>"]
+
+[dependencies]
+serde = "1"
+serde_derive = "1"
+docopt = "0.8"
+time = "0.1"
+rustfft = "2"
+rb = "0.3.1"
+libc = "0.2"
+thread-priority = "0.1.0"
+alsa = "0.2"
+
+
