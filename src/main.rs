@@ -1,6 +1,14 @@
 use std::ffi::CString;
 use std::ffi::CStr;
 
+use std::thread;
+
+use std::collections::LinkedList;
+use std::fs::File;
+use std::io::BufReader;
+use rodio::Source;
+
+
 use alsa::{Direction, ValueOr};
 use alsa::pcm::{PCM, HwParams, Format, Access, State};
 
@@ -8,7 +16,7 @@ use alsa::pcm::{PCM, HwParams, Format, Access, State};
 extern crate serde_derive;
 extern crate docopt;
 extern crate alsa;
-
+extern crate rodio;
 use docopt::Docopt;
 
 mod ffi;
@@ -20,6 +28,7 @@ pub struct Porcupine {
 
 impl Porcupine {
 
+    
     pub fn new(model_file_path: String,keyword_file_path : String, sensitivity : f32) -> Result<Self, String> {
 
         let mut instance = ffi::get_instance();
@@ -89,7 +98,6 @@ Options:
 ";
 
 
-
 fn main() {
 
 
@@ -101,6 +109,9 @@ fn main() {
               args.flag_keyword_file_path,
               args.flag_model_file_path);
 
+    let device = rodio::default_output_device().unwrap();
+
+    
     let keyword_file_path = args.flag_keyword_file_path;
     let model_file_path = args.flag_model_file_path;
     let mut pinstance = Porcupine::new(model_file_path,keyword_file_path,0.8).unwrap();
@@ -117,13 +128,17 @@ fn main() {
 
     let io_capture = pcm.io_i16().unwrap();
     let mut buffer: [i16; 512] = [0;512];
-
+    let mut beep;
+    
     loop {
 
         io_capture.readi(&mut buffer).unwrap();
 
         match pinstance.pv_porcupine_process(&mut buffer) {
-             Ok(true) => eprintln!("Keyword found"),
+             Ok(true) =>  {   eprintln!("Keyword detected");
+                              let file = std::fs::File::open("resources/ding.wav").unwrap();
+                              beep = rodio::play_once(&device, BufReader::new(file)).unwrap();
+                           },
              Ok(false) => {},
              Err(err) => eprintln!("Error"),
         }
