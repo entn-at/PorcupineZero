@@ -3,7 +3,5 @@ script:
   - cargo build --verbose --all
   - cargo test --verbose --all
 
-addons:
-  apt:
-    packages:
-    - libasound2-dev
+before_install:
+  - sudo apt-get install -y libasound2-dev
