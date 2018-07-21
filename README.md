@@ -13,6 +13,7 @@ If you just want to test the hotword you can execute
 To build from source install rustup:
 
     curl https://sh.rustup.rs -sSf | sh
+    and libasound2-dev with: sudo apt install libasound2-dev
     
 Build it with
 
